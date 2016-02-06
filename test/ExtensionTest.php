@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * This file is part of the SfContainerHaringoVal extension.
+ *
+ * @author Łukasz Makuch <kontakt@lukaszmakuch.pl>
+ * @license MIT http://opensource.org/licenses/MIT
+ */
+
 namespace lukaszmakuch\SfContainerHaringoVal;
 
 use lukaszmakuch\Haringo\Builder\Impl\HaringoBuilderImpl;
@@ -10,30 +17,40 @@ use lukaszmakuch\Haringo\MethodCall\MethodCall;
 use lukaszmakuch\Haringo\MethodSelector\Impl\ConstructorSelector;
 use lukaszmakuch\Haringo\ParamSelector\Impl\ParamByPosition;
 use lukaszmakuch\Haringo\ParamValue\AssignedParamValue;
+use PHPUnit_Framework_TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Container;
 
 class TestClass
 {
     public function __construct ($val) { $this->val = $val; }
 }
 
-class ExtensionTest extends \PHPUnit_Framework_TestCase
+class ExtensionTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @var Haringo
      */
     private $haringo;
     
+    /**
+     * @var Container 
+     */
+    private $container;
+    
     protected function setUp()
     {
+        $this->container = new ContainerBuilder();
+        
         $haringoBuilder = new HaringoBuilderImpl();
+        $ext = $this->getExtension($this->container);
+        $haringoBuilder->addValueSourceExtension($ext);
         $this->haringo = $haringoBuilder->build();
     }
     
     public function testResolvingValues()
     {
-        $container = new ContainerBuilder();
-        $container->set("value_from_the_container", 123);
+        $this->container->set("value_from_the_container", 123);
         
         $buildPlan = (new NewInstanceBuildPlan())
             ->setClassSource(new ExactClassPath(TestClass::class))
@@ -49,5 +66,17 @@ class ExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(123, $builtObject->val);
     }
     
-    
+    /**
+     * Gets extension using the given container.
+     * 
+     * @param Container $container
+     * @return InjectedValueExtension
+     */
+    private function getExtension(Container $container)
+    {
+        return new InjectedValueExtension(
+            new InjectedValueMapper(),
+            new InjectedValueResolver($this->container)
+        );
+    }
 }
