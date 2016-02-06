@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "91f0e46fc669aaf7d2402b34c4352235",
-    "content-hash": "df6064fb4911aa1a62a82dabec19e799",
+    "hash": "a4e698c6a18fced5914a7edcc90af99f",
+    "content-hash": "ae3122bedff0953f55e84e4ab38fd526",
     "packages": [
         {
             "name": "lukaszmakuch/class-based-registry",
@@ -47,16 +47,16 @@
         },
         {
             "name": "lukaszmakuch/haringo",
-            "version": "v0.0.2",
+            "version": "v0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lukaszmakuch/haringo.git",
-                "reference": "c4a4de8a689482c5b1887add4fa93eaba99642c4"
+                "reference": "086e06561032fa93e8f9385ba6902f90ec1c3906"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lukaszmakuch/haringo/zipball/c4a4de8a689482c5b1887add4fa93eaba99642c4",
-                "reference": "c4a4de8a689482c5b1887add4fa93eaba99642c4",
+                "url": "https://api.github.com/repos/lukaszmakuch/haringo/zipball/086e06561032fa93e8f9385ba6902f90ec1c3906",
+                "reference": "086e06561032fa93e8f9385ba6902f90ec1c3906",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 }
             ],
             "description": "Serializes the way how an object is created, not the object itself.",
-            "time": "2016-02-06 17:08:16"
+            "time": "2016-02-06 19:51:12"
         },
         {
             "name": "symfony/dependency-injection",

@@ -26,7 +26,7 @@
         "phpdocumentor/phpdocumentor": "2.*"
     },
     "require": {
-        "lukaszmakuch/haringo": "^0.0.2",
+        "lukaszmakuch/haringo": "^0.0.4",
         "symfony/dependency-injection": "^3.0"
     }
 }

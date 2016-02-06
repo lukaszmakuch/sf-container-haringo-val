@@ -10,6 +10,7 @@
 namespace lukaszmakuch\SfContainerHaringoVal;
 
 use lukaszmakuch\Haringo\Builder\Impl\HaringoBuilderImpl;
+use lukaszmakuch\Haringo\BuildPlan\BuildPlan;
 use lukaszmakuch\Haringo\BuildPlan\Impl\NewInstanceBuildPlan;
 use lukaszmakuch\Haringo\ClassSource\Impl\ExactClassPath;
 use lukaszmakuch\Haringo\Haringo;
@@ -18,8 +19,8 @@ use lukaszmakuch\Haringo\MethodSelector\Impl\ConstructorSelector;
 use lukaszmakuch\Haringo\ParamSelector\Impl\ParamByPosition;
 use lukaszmakuch\Haringo\ParamValue\AssignedParamValue;
 use PHPUnit_Framework_TestCase;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class TestClass
 {
@@ -52,18 +53,18 @@ class ExtensionTest extends PHPUnit_Framework_TestCase
     {
         $this->container->set("value_from_the_container", 123);
         
-        $buildPlan = (new NewInstanceBuildPlan())
-            ->setClassSource(new ExactClassPath(TestClass::class))
-            ->addMethodCall((new MethodCall(ConstructorSelector::getInstance()))
-                ->assignParamValue(new AssignedParamValue(
-                    new ParamByPosition(0), 
-                    new InjectedValue("value_from_the_container")
-                ))
-            );
+        $buildPlan = $this->getBuildPlanOfObjectUsing("value_from_the_container");
         
         /* @var $builtObject TestClass */
         $builtObject = $this->haringo->buildObjectBasedOn($buildPlan);
         $this->assertEquals(123, $builtObject->val);
+    }
+    
+    public function testExceptionIfWrongKey()
+    {
+        $this->setExpectedException(\lukaszmakuch\Haringo\Exception\UnableToBuild::class);
+        $buildPlan = $this->getBuildPlanOfObjectUsing("wrong_key");
+        $this->haringo->buildObjectBasedOn($buildPlan);
     }
     
     /**
@@ -78,5 +79,25 @@ class ExtensionTest extends PHPUnit_Framework_TestCase
             new InjectedValueMapper(),
             new InjectedValueResolver($this->container)
         );
+    }
+    
+    /**
+     * Gets a build plan of TestClass instance with 
+     * a value resolved from the container (with key equals $containerKey)
+     * passed as the constructor parameter.
+     * 
+     * @param String $containerKey
+     * @return BuildPlan 
+     */
+    private function getBuildPlanOfObjectUsing($containerKey)
+    {
+        return (new NewInstanceBuildPlan())
+            ->setClassSource(new ExactClassPath(TestClass::class))
+            ->addMethodCall((new MethodCall(ConstructorSelector::getInstance()))
+                ->assignParamValue(new AssignedParamValue(
+                    new ParamByPosition(0), 
+                    new InjectedValue($containerKey)
+                ))
+            );
     }
 }
