@@ -87,10 +87,8 @@ class ExtensionTest extends PHPUnit_Framework_TestCase
      */
     private function getExtension(Container $container)
     {
-        return new InjectedValueExtension(
-            new InjectedValueMapper(),
-            new InjectedValueResolver($this->container)
-        );
+        $f = new InjectedValueExtensionFactory();
+        return $f->buildWith($container);
     }
     
     /**
