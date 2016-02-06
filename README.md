@@ -1,7 +1,7 @@
+[![travis](https://travis-ci.org/lukaszmakuch/sf-container-haringo-val.svg)](https://travis-ci.org/lukaszmakuch/sf-container-haringo-val)
+
 # SfContainerHaringoVal
 Let Haringo use values from the Symfony DI container!
-
-[![travis](https://travis-ci.org/lukaszmakuch/sf-container-haringo-val.svg)](https://travis-ci.org/lukaszmakuch/sf-container-haringo-val)
 
 ## Getting Symfony container Haringo value source extension
 ```
