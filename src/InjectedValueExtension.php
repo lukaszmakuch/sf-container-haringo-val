@@ -13,11 +13,22 @@ use lukaszmakuch\Haringo\Builder\Extension\ValueSourceExtension;
 use lukaszmakuch\Haringo\ValueSourceMapper\ValueSourceArrayMapper;
 use lukaszmakuch\Haringo\ValueSourceResolver\ValueResolver;
 
+/**
+ * Allows to use values from the Symfony dependency injection container.
+ * 
+ * @author Łukasz Makuch <kontakt@lukaszmakuch.pl>
+ */
 class InjectedValueExtension implements ValueSourceExtension
 {
     private $mapper;
     private $resolver;
     
+    /**
+     * Provides dependencies.
+     * 
+     * @param ValueSourceArrayMapper $mapper used to map value sources
+     * @param ValueResolver $resolver used to read values from the container
+     */
     public function __construct(
         ValueSourceArrayMapper $mapper,
         ValueResolver $resolver

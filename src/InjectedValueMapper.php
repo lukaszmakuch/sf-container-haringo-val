@@ -13,6 +13,11 @@ use lukaszmakuch\Haringo\ValueSourceMapper\ValueSourceArrayMapper;
 use lukaszmakuch\Haringo\Mapper\Exception\ImpossibleToBuildFromArray;
 use lukaszmakuch\Haringo\Mapper\Exception\ImpossibleToMapObject;
 
+/**
+ * Maps injected values to arrays and from arrays to objects.
+ * 
+ * @author Łukasz Makuch <kontakt@lukaszmakuch.pl>
+ */
 class InjectedValueMapper implements ValueSourceArrayMapper
 {
     private static $MAPPED_KEY_CONTAINER_KEY = 0;

@@ -15,10 +15,20 @@ use lukaszmakuch\Haringo\ValueSourceResolver\ValueResolver;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
+/**
+ * Reads data from the DI container.
+ * 
+ * @author Łukasz Makuch <kontakt@lukaszmakuch.pl>
+ */
 class InjectedValueResolver implements ValueResolver
 {
     private $container;
     
+    /**
+     * Provides DI container used to resolve values.
+     * 
+     * @param Container $container
+     */
     public function __construct(Container $container)
     {
         $this->container = $container;
@@ -40,5 +50,4 @@ class InjectedValueResolver implements ValueResolver
         $valueFromContainer = $this->container->get($keyFromContainer);
         return $valueFromContainer;
     }
-
 }
