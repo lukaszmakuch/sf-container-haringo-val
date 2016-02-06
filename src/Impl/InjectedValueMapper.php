@@ -7,11 +7,12 @@
  * @license MIT http://opensource.org/licenses/MIT
  */
 
-namespace lukaszmakuch\SfContainerHaringoVal;
+namespace lukaszmakuch\SfContainerHaringoVal\Impl;
 
-use lukaszmakuch\Haringo\ValueSourceMapper\ValueSourceArrayMapper;
 use lukaszmakuch\Haringo\Mapper\Exception\ImpossibleToBuildFromArray;
 use lukaszmakuch\Haringo\Mapper\Exception\ImpossibleToMapObject;
+use lukaszmakuch\Haringo\ValueSourceMapper\ValueSourceArrayMapper;
+use lukaszmakuch\SfContainerHaringoVal\InjectedValue;
 
 /**
  * Maps injected values to arrays and from arrays to objects.

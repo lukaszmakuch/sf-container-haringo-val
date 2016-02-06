@@ -9,9 +9,9 @@
 
 namespace lukaszmakuch\SfContainerHaringoVal;
 
+use lukaszmakuch\SfContainerHaringoVal\Impl\InjectedValueMapper;
+use lukaszmakuch\SfContainerHaringoVal\Impl\InjectedValueResolver;
 use lukaszmakuch\SfContainerHaringoVal\InjectedValueExtension;
-use lukaszmakuch\SfContainerHaringoVal\InjectedValueMapper;
-use lukaszmakuch\SfContainerHaringoVal\InjectedValueResolver;
 use Symfony\Component\DependencyInjection\Container;
 
 /**

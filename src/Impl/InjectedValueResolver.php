@@ -7,7 +7,7 @@
  * @license MIT http://opensource.org/licenses/MIT
  */
 
-namespace lukaszmakuch\SfContainerHaringoVal;
+namespace lukaszmakuch\SfContainerHaringoVal\Impl;
 
 use lukaszmakuch\Haringo\ValueSource\ValueSource;
 use lukaszmakuch\Haringo\ValueSourceResolver\Exception\ImpossibleToResolveValue;
@@ -46,8 +46,6 @@ class InjectedValueResolver implements ValueResolver
     private function resolveValueFromImpl(ValueSource $source)
     {
         /* @var $source InjectedValue */
-        $keyFromContainer = $source->getKeyFromContainer();
-        $valueFromContainer = $this->container->get($keyFromContainer);
-        return $valueFromContainer;
+        return $this->container->get($source->getKeyFromContainer());
     }
 }
