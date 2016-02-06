@@ -67,6 +67,18 @@ class ExtensionTest extends PHPUnit_Framework_TestCase
         $this->haringo->buildObjectBasedOn($buildPlan);
     }
     
+    public function testMapping()
+    {
+        $this->container->set("value_from_the_container", 123);
+        
+        $plan = $this->getBuildPlanOfObjectUsing("value_from_the_container");
+
+        $serializedPlan = $this->haringo->serializeBuildPlan($plan);
+        $unserializedPlan = $this->haringo->deserializeBuildPlan($serializedPlan);
+        $builtObject = $this->haringo->buildObjectBasedOn($unserializedPlan);
+        $this->assertEquals(123, $builtObject->val);
+    }
+    
     /**
      * Gets extension using the given container.
      * 
